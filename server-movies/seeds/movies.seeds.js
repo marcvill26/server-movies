@@ -52,4 +52,4 @@ db.connectDB()
     })
     .catch(err => console.error(`Error creando documentos en DB: ${err}`))
     // Cerrar la conexión
-    .finally(() => mongoose.disconnect());
+    .finally(() => mongoose.disconnect())

@@ -60,7 +60,7 @@ moviesRouter.get('/:id', (req, res, next) => {
 
 //get by title
 
-moviesRouter.get('title/:title', (req, res, next) => {
+moviesRouter.get('/movies/title/:title', (req, res, next) => {
     const title = req.params.title;
 
     return Movie.findById(title)
@@ -81,7 +81,7 @@ moviesRouter.get('title/:title', (req, res, next) => {
 
 // get by genre 
 
-moviesRouter.get('/genre/:genre', (req, res, next) => {
+moviesRouter.get('/movies/genre/:genre', (req, res, next) => {
     const genre = req.params.genre;
     return Movie.findById(genre)
     .then((movie) => {
