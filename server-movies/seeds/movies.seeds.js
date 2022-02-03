@@ -35,7 +35,7 @@ const movies = [
         genre:'Thriller, Intriga'
     },
 ];
-
+const moviesDocuments = movies.map(coche => new Movie(movies));
 db.connectDB()
     // Ver si hay coches y eliminarlos
     .then(async () => {
@@ -52,4 +52,4 @@ db.connectDB()
     })
     .catch(err => console.error(`Error creando documentos en DB: ${err}`))
     // Cerrar la conexión
-    .finally(() => mongoose.disconnect())
+    .finally(() => mongoose.disconnect());
