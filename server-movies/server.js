@@ -15,6 +15,7 @@ server.get('/', (req, res) => {
 
 server.use('/movies', moviesRouter);
 
+
 server.use('*', (req, res, next) => {
     const error = new Error ('Ruta no encontrada');
     error.status= 404;

@@ -35,3 +35,21 @@ const movies = [
         genre:'Thriller, Intriga'
     },
 ];
+
+db.connectDB()
+    // Ver si hay coches y eliminarlos
+    .then(async () => {
+        const todasPelis = await Movie.find();
+        if (todasPelis.length > 0) {
+            await Movie.collection.drop();
+        }
+    })
+    .catch(err => console.error(`Error eliminado información de la DB: ${err}`))
+    // Añadir documentos de coches a la base de datos
+    .then(async () => {
+        await Movie.insertMany(moviesDocuments)
+        // await Promise.all(cochesDocuments.map((coche) => Coche.insert(coche)));
+    })
+    .catch(err => console.error(`Error creando documentos en DB: ${err}`))
+    // Cerrar la conexión
+    .finally(() => mongoose.disconnect())
