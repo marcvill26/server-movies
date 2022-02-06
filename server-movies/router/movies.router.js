@@ -63,7 +63,7 @@ moviesRouter.get('/:id', (req, res, next) => {
 moviesRouter.get('/movies/title/:title', (req, res, next) => {
     const title = req.params.title;
 
-    return Movie.findById(title)
+    return Movie.findOne(title)
     .then((movie) => {
         if (!movie){
             const error= new Error('Titulo de pelicula no encontrada');
@@ -83,7 +83,7 @@ moviesRouter.get('/movies/title/:title', (req, res, next) => {
 
 moviesRouter.get('/movies/genre/:genre', (req, res, next) => {
     const genre = req.params.genre;
-    return Movie.findById(genre)
+    return Movie.findOne(genre)
     .then((movie) => {
         if (!movie){
             const error = new Error('Tipo de pelicula no encontrado');
