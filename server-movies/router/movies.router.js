@@ -60,7 +60,7 @@ moviesRouter.get('/:id', (req, res, next) => {
 
 //get by title
 
-moviesRouter.get('/movies/title/:title', (req, res, next) => {
+moviesRouter.get('/title', (req, res, next) => {
     const title = req.params.title;
 
     return Movie.findOne(title)
@@ -81,7 +81,7 @@ moviesRouter.get('/movies/title/:title', (req, res, next) => {
 
 // get by genre 
 
-moviesRouter.get('/movies/genre/:genre', (req, res, next) => {
+moviesRouter.get('/genre', (req, res, next) => {
     const genre = req.params.genre;
     return Movie.findOne(genre)
     .then((movie) => {
@@ -95,6 +95,52 @@ moviesRouter.get('/movies/genre/:genre', (req, res, next) => {
     .catch(err => {
         const error = new Error(err);
         error.status(500);
+        return next(error);
+    });
+});
+
+//post.
+
+moviesRouter.post('/', (req,res, next) =>{
+    console.log('Body recibido', req.body);
+    const nuevaPelicula = new Movie(
+        req.body);
+
+    return nuevaPelicula.save()
+    .then(() => {
+        return res.status(201).json(nuevaPelicula);
+    })
+    .catch(err => {
+        const error = new Error(err);
+        error.status=500;
+        return next(error);
+    });
+});
+
+//put
+moviesRouter.put('/:id',(req, res, next) => {
+    const id = req.params.id;
+    return Movie.findByIdAndUpdate(id, {$set: req.body}, {new: true})
+    .then(movieActualizada => {
+        return res.status(200).json(movieActualizada);
+    })
+    .catch(err => {
+        const error = new Error(err);
+        error.status=500;
+        return next(error);
+    });
+});
+
+//delete
+moviesRouter.delete('/:id', (req, res, next) => {
+    const id = req.params.id;
+    return Movie.findByIdAndDelete(id)
+    .then(() => {
+        return res.status(200).json(`Coche Con id ${id} eliminado`);
+    })
+    .catch(err => {
+        const error = new Error(err);
+        error.status=500;
         return next(error);
     });
 });
