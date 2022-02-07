@@ -2,7 +2,7 @@ const express = require('express');
 
 const moviesRouter = require('../server-movies/router/movies.router');
 const db = require('../server-movies/db');
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 const server = express();
 //añadimos milddlewares para leer los body
